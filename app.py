@@ -1,9 +1,20 @@
+import os 
+from os.path import join, dirname
+from dotenv import load_dotenv
+
 from flask import Flask, render_template, request, jsonify
 #karena tidak pakai vscode
 import dns.resolver
 dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers=['8.8.8.8']
 from pymongo import MongoClient
+
+dotenv_path = join(dirname(__file__),'.env')
+load_dotenv(dotenv_path)
+
+MONGODB_URI = os.environ.get('mongodb+srv://AgusSantoso:iCGihqUncwckUEaz@cluster0.c3fyjgp.mongodb.net/?retryWrites=true&w=majority')
+DB_NAME = os.environ.get('AgusSantoso')
+
 client = MongoClient('mongodb+srv://AgusSantoso:iCGihqUncwckUEaz@cluster0.c3fyjgp.mongodb.net/?retryWrites=true&w=majority')
 db = client.dbsparta
 app = Flask(__name__)
